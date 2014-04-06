@@ -151,7 +151,7 @@ void store_audproc_cal(int32_t path, struct cal_block *cal_block)
 			acdb_data.pmem_len);
 		goto done;
 	}
-	if (path >= MAX_AUDPROC_TYPES) {
+	if (path >= MAX_AUDPROC_TYPES || path < 0) {
 		pr_aud_err("ACDB=> Bad path sent to %s, path: %d\n",
 			__func__, path);
 		goto done;

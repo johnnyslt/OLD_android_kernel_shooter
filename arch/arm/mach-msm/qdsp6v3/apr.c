@@ -400,7 +400,8 @@ struct apr_svc *apr_register(char *dest, char *svc_name, apr_fn svc_fn,
 	svc->client_id = client_id;
 	if (src_port != 0xFFFFFFFF) {
 		temp_port = ((src_port >> 8) * 8) + (src_port & 0xFF);
-		if (temp_port >= APR_MAX_PORTS) {
+		pr_debug("port = %d t_port = %d\n", src_port, temp_port);
+		if (temp_port >= APR_MAX_PORTS || temp_port < 0) {
 			mutex_unlock(&svc->m_lock);
 			pr_aud_err("APR: illegal port ID %d\n", temp_port);
 			svc = NULL;
